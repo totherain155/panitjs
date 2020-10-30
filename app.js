@@ -1,17 +1,23 @@
 const canvas = document.getElementById("jsCanvas");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext('2d');
+const colors = document.getElementsByClassName("jsColor");
+
+canvas.width = 700;
+canvas.height = 700;
 
 ctx.strokeStyle = "#2c2c2c";
 ctx.lineWidth = 2.5;
 
-let painting = false;
+
+
+let painting = false; 
+
+function startPainting(){
+    painting = true;
+}
 
 function stopPainting(){
     painting = false;
-}
-
-function startPainting(){
-   painting = true;
 }
 
 
@@ -21,25 +27,28 @@ function onMouseMove(event){
     if(!painting){
         ctx.beginPath();
         ctx.moveTo(x, y);
-    } else {
+    }else{
         ctx.lineTo(x, y);
         ctx.stroke();
     }
-   
-}
-
-
-
-function onMouseDown(event){
     
-     painting = true;
 }
+
+function handleColorClick(event){
+   const color = event.target.style.backgroundColor;
+   ctx.strokeStyle = color;
+}
+
 
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mousedown", onMouseDown);
-    canvas.addEventListener("mouseup", stopPainting);
+    canvas.addEventListener("mousedown", startPainting );
+    canvas.addEventListener("mouseup",  stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
-
 }
+
+Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick))
+/*forEach의 color엔 어떤 이름이 와도 상관없다. */ 
+
+/* console.log(Array.from(colors)); array.from 메소드는 object로부터 array를 만든다. */
