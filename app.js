@@ -1,6 +1,8 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext('2d');
 const colors = document.getElementsByClassName("jsColor");
+const range = document.getElementById("jsRange");
+const mode = document.getElementById("jsMode");
 
 canvas.width = 700;
 canvas.height = 700;
@@ -11,6 +13,9 @@ ctx.lineWidth = 2.5;
 
 
 let painting = false; 
+let filling = false;
+
+
 
 function startPainting(){
     painting = true;
@@ -39,6 +44,22 @@ function handleColorClick(event){
    ctx.strokeStyle = color;
 }
 
+function handleRangeChange(event){
+   const size = event.target.value;
+   ctx.lineWidth = size;
+
+
+}
+
+function handleModeClick(){
+   if(filling === true){
+       filling = false;
+       mode.innerText = "Fill";
+   } else {
+       filling = true;
+       mode.innerText = "Paint";
+   }
+}
 
 
 if(canvas){
@@ -52,3 +73,11 @@ Array.from(colors).forEach(color => color.addEventListener("click", handleColorC
 /*forEach의 color엔 어떤 이름이 와도 상관없다. */ 
 
 /* console.log(Array.from(colors)); array.from 메소드는 object로부터 array를 만든다. */
+
+if(range){
+    range.addEventListener("input", handleRangeChange)
+}
+
+if(mode){
+    mode.addEventListener("click", handleModeClick);
+}
