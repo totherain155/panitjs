@@ -4,80 +4,96 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 
-canvas.width = 700;
-canvas.height = 700;
+const INITIAL_COLOR = "#2c2c2c" // 반복하게 될 때 이런식으로 변수를 설정한다.
+const CANVAS_SIZE = 700;
 
-ctx.strokeStyle = "#2c2c2c";
+
+canvas.width = CANVAS_SIZE;
+canvas.height = CANVAS_SIZE;
+
+ctx.strokeStyle = INITIAL_COLOR;
+ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
 
 
 
-let painting = false; 
+
+let painting = false;
 let filling = false;
 
-
-
-function startPainting(){
-    painting = true;
-}
 
 function stopPainting(){
     painting = false;
 }
 
+function startPainting(){
+   painting = true;
+}
+
+
+
 
 function onMouseMove(event){
-    const x = event.offsetX;
-    const y = event.offsetY;
-    if(!painting){
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-    }else{
-        ctx.lineTo(x, y);
-        ctx.stroke();
-    }
-    
+   const x = event.offsetX;
+   const y = event.offsetY;
+   if(!painting){
+       ctx.beginPath();
+       ctx.moveTo(x, y)
+   }else{
+       ctx.lineTo(x, y);
+       ctx.stroke();  
+   }
+
 }
 
 function handleColorClick(event){
-   const color = event.target.style.backgroundColor;
-   ctx.strokeStyle = color;
+    const color = event.target.style.backgroundColor;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
 }
 
 function handleRangeChange(event){
-   const size = event.target.value;
-   ctx.lineWidth = size;
-
-
+    const size = event.target.value;
+    ctx.lineWidth = size; 
+    
 }
 
-function handleModeClick(){
-   if(filling === true){
-       filling = false;
-       mode.innerText = "Fill";
-   } else {
-       filling = true;
-       mode.innerText = "Paint";
+function handleCanvasClick(){
+   if(filling){
+       ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
    }
+
 }
+
+
+function handleModeClick(event){
+   if(filling === false){
+       filling = true; 
+       mode.innerText = "paint";
+       
+   }else {
+        filling = false; 
+       mode.innerText = "fill";
+   }
+}         
+
+
 
 
 if(canvas){
-    canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mousedown", startPainting );
-    canvas.addEventListener("mouseup",  stopPainting);
-    canvas.addEventListener("mouseleave", stopPainting);
+       canvas.addEventListener("mousemove", onMouseMove);
+       canvas.addEventListener("mousedown", startPainting);
+       canvas.addEventListener("mouseup", stopPainting);
+       canvas.addEventListener("mouseleave", stopPainting);
+       canvas.addEventListener("click", handleCanvasClick);        
 }
 
 Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick))
-/*forEach의 color엔 어떤 이름이 와도 상관없다. */ 
-
-/* console.log(Array.from(colors)); array.from 메소드는 object로부터 array를 만든다. */
 
 if(range){
     range.addEventListener("input", handleRangeChange)
 }
 
 if(mode){
-    mode.addEventListener("click", handleModeClick);
-}
+    mode.addEventListener("click", handleModeClick)
+} 
