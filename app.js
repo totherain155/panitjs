@@ -3,6 +3,8 @@ const ctx = canvas.getContext('2d');
 const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
+const saveBtn = document.getElementById("jsSave");
+
 
 const INITIAL_COLOR = "#2c2c2c" // 반복하게 될 때 이런식으로 변수를 설정한다.
 const CANVAS_SIZE = 700;
@@ -10,6 +12,10 @@ const CANVAS_SIZE = 700;
 
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
+
+
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE); // CANVAS의 초기화를 시켜준다.
 
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
@@ -77,7 +83,17 @@ function handleModeClick(event){
    }
 }         
 
+function handleContextMenu(event){
+    event.preventDefault();
+}
 
+function handleSaveClick(){
+    const image = canvas.toDataURL();
+    const link = document.createElement("a");
+    link.href = image;   //href는 image(url)가 되어야 한다.
+    link.download = "PainJs[🎨]"
+    link.click();
+}
 
 
 if(canvas){
@@ -85,7 +101,8 @@ if(canvas){
        canvas.addEventListener("mousedown", startPainting);
        canvas.addEventListener("mouseup", stopPainting);
        canvas.addEventListener("mouseleave", stopPainting);
-       canvas.addEventListener("click", handleCanvasClick);        
+       canvas.addEventListener("click", handleCanvasClick);   
+       canvas.addEventListener("contextmenu", handleContextMenu);     
 }
 
 Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick))
@@ -96,4 +113,8 @@ if(range){
 
 if(mode){
     mode.addEventListener("click", handleModeClick)
-} 
+}
+
+if(saveBtn){
+    saveBtn.addEventListener("click", handleSaveClick);
+}
