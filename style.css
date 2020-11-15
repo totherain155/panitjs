@@ -1,40 +1,74 @@
 @import "reset.css";
 
 body{
-  background-color :whitesmoke;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
-  Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-  padding-top : 50px; /*content와 border(선) 사이의 공간을 말한다.*/
-  
-
+   background-color: whitesmoke;
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
+   'Open Sans', 'Helvetica Neue', sans-serif;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 30px;
 }
 
 .canvas{
+    background-color: white;
     width: 700px;
     height: 700px;
-    background-color:white;
     border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.00);
+
+
+}
+
+
+.controls{
+    display: flex;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+ }
+ 
+.controls  .controls_btns{
+   margin-bottom: 30px;
+
+
+}
+
+.controls_btns  button{
+    all: unset;
+    cursor: pointer;
+    background-color: white;
+    padding: 5px  1px;
+    width: 70px;
+    text-align: center;
+    border:2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 15px;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.00);
 
 }
 
-.controls{
-    margin-top: 90px;
+.controls_btns  button:active{
+    transform: scale(0.97);
 }
 
-.controls  .controls_colors{
+.controls .controls_colors{
     display: flex;
-    
 }
 
-.controls_colors  .controls_color{
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    margin: 1px;
+
+.controls_colors  .controls_color {
+    width:50px;
+    height:50px;
+    border-radius : 25px;
     cursor: pointer;
+    margin: 1.5px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.00);
+}
+
+.controls  .controls_range{
+    margin-bottom: 30px;
 }

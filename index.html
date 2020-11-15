@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>PaintJs</title>
+    <link rel="stylesheet" href="style.css"> <!-- link + enter-->
 </head>
 <body>
-    <canvas id="jsCanvas" class="canvas"></canvas>
-    <div class="controls" >
-        <div class="controls_colors">
-            <div class="controls_color" style="background-color: #2c2c2c"></div>
-            <div class="controls_color" style="background-color: white"></div>
-            <div class="controls_color" style="background-color: #ff3b30"></div>
-            <div class="controls_color" style="background-color: #ff9500"></div>
-            <div class="controls_color" style="background-color: #ffcc00"></div>
-            <div class="controls_color" style="background-color: #4cd963"></div>
-            <div class="controls_color" style="background-color: #5ac8fa"></div>
-            <div class="controls_color" style="background-color: #0579ff"></div>
-            <div class="controls_color" style="background-color: #5856d6"></div>
-        </div>
-    </div>
+   <canvas id="jsCanvas" class="canvas"></canvas>
+   <div class="controls" >
+       <div class="controls_range">
+           <input type="range" name="" id="jsRange" min="0.1" max="5" value="2.5" step="0.1" />
+       </div>
+     <div class="controls_btns">  <!--div.controls_btns>button#jsMode+button#jsSave와 같이 작성한다.-->
+         <button id="jsMode">Draw</button> <!--클릭하면 Fill로 바꿔줄 것이다.-->
+         <button id="jsSave">Save</button>
+     </div>
+     <div class="controls_colors">
+         <div class="controls_color" style="background-color: #000000;"></div>
+         <div class="controls_color" style="background-color: #0000FF"></div>
+         <div class="controls_color" style="background-color: #A52A2A;"></div>
+         <div class="controls_color" style="background-color: #e056fd;"></div>
+         <div class="controls_color" style="background-color: #00CED1"></div>
+         <div class="controls_color" style="background-color: #FFD700;"></div>
+         <div class="controls_color" style="background-color: #663399;"></div>
+         <div class="controls_color" style="background-color: #87CEFA"></div>
+         <div class="controls_color" style="background-color: #FFA500"></div>
+     </div>
+
+   </div>
+    
 </body>
-</html>l
+</html>
